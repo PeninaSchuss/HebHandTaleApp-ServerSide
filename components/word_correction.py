@@ -11,8 +11,9 @@ def get_word_suggestions(word):
     for vocab_word in tqdm(words):
         lev_dist_word = lev_dist(word, vocab_word)
         if lev_dist_word <= MIN_EDIT_DISTANCE_LENGTH:
-            closest_words.append(vocab_word)
-    return closest_words
+            closest_words.append((lev_dist_word, vocab_word))
+    closest_words = sorted(closest_words, key=lambda x: (x[0], x[1]))
+    return [word for _, word in closest_words[:10]]
 
 
 def lev_dist(a, b):
