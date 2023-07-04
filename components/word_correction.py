@@ -1,9 +1,9 @@
 from functools import lru_cache
-
 from tqdm import tqdm
 
-MIN_EDIT_DISTANCE_LENGTH = 1
-WORDS_FILENAME = r"C:\Users\User\Desktop\כללי\שנה ג\פרויקט גמר\HandwritingProject\all_append_fatverb.txt"
+from config import WORDS_FILENAME
+
+MIN_EDIT_DISTANCE_LENGTH = 3
 
 def get_word_suggestions(word):
     closest_words = []

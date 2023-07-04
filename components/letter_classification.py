@@ -8,11 +8,10 @@ from keras.models import Sequential
 from keras.applications.vgg19 import VGG19
 from keras.layers import Dense, Flatten
 from sklearn.model_selection import train_test_split
+from config import DATA_DIR_TRAIN, IMAGE_SIZE, ABC
 
 
-
-INPUT_IMAGE_SIZE = (32, 32, 3)
-DATA_DIR_TRAIN = r'/Users/stav/Projects/CodeSH/vgg_for_final_project/TRAIN'
+INPUT_IMAGE_SIZE = (IMAGE_SIZE, IMAGE_SIZE, 3)
 SEED           = 42
 EPOCHS         = 1
 
@@ -88,6 +87,17 @@ model.summary()
 
 
 def predict_letters(X):
-    return model.predict(X)
+    # Get the probability for each possible character
+    probabilities = model.predict(X)
+    # Get the index of the highest probability character
+    max_class_indices = np.argmax(probabilities, axis=1)
+    # Get the corresponding Hebrew letter
+    predicted_letters = [ABC[i] for i in max_class_indices]
+    # Append the predicted letter to the list
+    # predicted_letters.append(predicted_letter)
+    predicted_letters_word = ''.join(predicted_letters)
+    return predicted_letters_word
+
+
 
 # history = train_model(model)

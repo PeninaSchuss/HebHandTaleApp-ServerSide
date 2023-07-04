@@ -1,13 +1,12 @@
+import os
 import cv2
-import random
-from subprocess import call
 import numpy as np
-import pandas as pd
-import seaborn as sns
-from matplotlib import pyplot as plt
+from PIL import Image
+from config import IMAGE_SIZE
 
 
 def process_image(image_path):
+    assert os.path.exists(image_path)
     # 01 - Load the image
     img = cv2.imread(image_path)
     # 02 - Convert the image to grayscale
@@ -52,7 +51,13 @@ def _process_characters(connected_components_output):
             # Add padding to the image
             char_cropped = cv2.copyMakeBorder(char_cropped, top, bottom, left, right, cv2.BORDER_CONSTANT,
                                               value=[255, 255, 255])
-        chars_cropped.append(char_cropped)
+            from matplotlib import pyplot as plt
+            plt.imshow(char_cropped)
+            plt.show()
+            char_square = resize_as_square(char_cropped)
+            plt.imshow(char_square)
+            plt.show()
+        chars_cropped.append(char_square)
 
         print(f'Original char size: {char.shape}, New char size: {char[y:y + h, x:x + w].shape}')
 
@@ -63,3 +68,7 @@ def _process_characters(connected_components_output):
 
     return chars_cropped
 
+
+def resize_as_square(img_np):
+    img_square = Image.fromarray(img_np).resize((IMAGE_SIZE, IMAGE_SIZE))
+    return np.array(img_square)
