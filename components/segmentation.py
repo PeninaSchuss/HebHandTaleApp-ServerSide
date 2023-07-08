@@ -8,7 +8,9 @@ from config import IMAGE_SIZE
 def process_image(image_path):
     assert os.path.exists(image_path)
     # 01 - Load the image
-    img = cv2.imread(image_path)
+    img = cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
+
+    # img = cv2.imread(image_path)
     # 02 - Convert the image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # numpy.ndarray, (257, 522)
     # 03 - Apply thresholding to convert the image to binary
@@ -36,10 +38,7 @@ def _process_characters(connected_components_output):
         char = np.stack([char] * 3, axis=-1).astype(np.uint8) * 255
         char = cv2.bitwise_not(char)
         chars.append(char)
-        # NEW - Add cropped char
         x, y, w, h, area = stats[i + 1]
-        print(f'Component={i}, Original char size: {char.shape}, New char size: {char[y:y + h, x:x + w].shape}')
-        #     char = labels == i + 1
         char_cropped = char[y:y + h, x:x + w]
         if char_cropped.shape[0] != char_cropped.shape[1]:
             max_dim = max(char_cropped.shape[0], char_cropped.shape[1])
@@ -51,18 +50,10 @@ def _process_characters(connected_components_output):
             # Add padding to the image
             char_cropped = cv2.copyMakeBorder(char_cropped, top, bottom, left, right, cv2.BORDER_CONSTANT,
                                               value=[255, 255, 255])
-            from matplotlib import pyplot as plt
-            plt.imshow(char_cropped)
-            plt.show()
             char_square = resize_as_square(char_cropped)
-            plt.imshow(char_square)
-            plt.show()
         chars_cropped.append(char_square)
 
-        print(f'Original char size: {char.shape}, New char size: {char[y:y + h, x:x + w].shape}')
-
         coords.append(stats[i + 1][:2])
-        # print(coords)
     # Sort the characters based on their x-coordinates (from right to left)
     chars_cropped = [char for _, char in sorted(zip(coords, chars_cropped), key=lambda x: x[0][0], reverse=True)]
 

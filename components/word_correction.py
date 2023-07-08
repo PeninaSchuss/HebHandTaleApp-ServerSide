@@ -3,7 +3,7 @@ from tqdm import tqdm
 
 from config import WORDS_FILENAME
 
-MIN_EDIT_DISTANCE_LENGTH = 3
+MIN_EDIT_DISTANCE_LENGTH = 1
 
 def get_word_suggestions(word):
     closest_words = []
