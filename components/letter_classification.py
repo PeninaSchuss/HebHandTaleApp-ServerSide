@@ -3,21 +3,24 @@ import numpy as np
 from config import ABC
 from keras.models import model_from_json
 from keras.models import load_model
-def load_model(weights_path, architecture_path):
+from config import MODEL_PATH_ARCHITECTURE, MODEL_PATH_WEIGHTS
+
+
+def load_model():
     # Load model architecture from JSON
-    with open(architecture_path, 'r') as json_file:
+    with open(MODEL_PATH_ARCHITECTURE, 'r') as json_file:
         loaded_model_json = json_file.read()
 
     model = model_from_json(loaded_model_json)
 
     # Load model weights
-    model.load_weights(weights_path)
+    model.load_weights(MODEL_PATH_WEIGHTS)
 
     print("Model loaded successfully.")
     return model
 
 def predict_letters(X):
-    model = load_model('model_weights.h5', 'model_architecture.json')
+    model = load_model()
     probabilities = model.predict(X)
     # Get the index of the highest probability character
     max_class_indices = np.argmax(probabilities, axis=1)

@@ -10,6 +10,9 @@ WORDS_FILENAME = os.path.join(dir_path, "all_append_fatverb.txt")
 # Examples directory
 IMAGES_DIR     = os.path.join(dir_path, "data")
 
+MODEL_PATH_ARCHITECTURE = os.path.join(dir_path, "model", "model_architecture.json")
+MODEL_PATH_WEIGHTS      = os.path.join(dir_path, "model", "model_weights.h5")
+
 
 # ========= Settings ============
 IMAGE_SIZE = 32

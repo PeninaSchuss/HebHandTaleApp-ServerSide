@@ -17,9 +17,12 @@ def run_e2e(image_path):
     print(predicted_word)
     word_suggestions = get_word_suggestions(predicted_word)
     print(word_suggestions)
+    return word_suggestions
 
 
-input_image_name = IMAGE_NAME_WORD_HELLO  # Choose here
-input_image_fullpath = os.path.join(IMAGES_DIR, input_image_name)
-print(f'Predict word... {input_image_fullpath}')
-run_e2e(input_image_fullpath)
+if __name__ == "__main__":
+    input_image_name = IMAGE_NAME_WORD_HELLO  # Choose here
+    input_image_fullpath = os.path.join(IMAGES_DIR, input_image_name)
+    print(f'Predict word... {input_image_fullpath}')
+    run_e2e(input_image_fullpath)
+
