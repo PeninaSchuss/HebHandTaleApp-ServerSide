@@ -11,7 +11,7 @@ IMAGE_NAME_WORD_CALL  = 'call.png'
 IMAGE_NAME_WORD_HELLO = 'hello.png'
 
 
-def run_e2e(image_path):
+def run_e2e(image_path, top_k=10):
     characters = process_image(image_path)
     predicted_word = predict_letters(np.array(characters))
     print(predicted_word)
