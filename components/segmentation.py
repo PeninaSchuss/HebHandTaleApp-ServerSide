@@ -50,7 +50,8 @@ def _process_characters(connected_components_output):
             # Add padding to the image
             char_cropped = cv2.copyMakeBorder(char_cropped, top, bottom, left, right, cv2.BORDER_CONSTANT,
                                               value=[255, 255, 255])
-            char_square = resize_as_square(char_cropped)
+        # Resize the character to a square shape
+        char_square = resize_as_square(char_cropped)
         chars_cropped.append(char_square)
 
         coords.append(stats[i + 1][:2])

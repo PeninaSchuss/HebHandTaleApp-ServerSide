@@ -18,6 +18,6 @@ def get_accuracy_at_k(test_set, k=10):
     score = correct_items / total_items
     return score
 
-test_set = TEST_SET[:3]
+test_set = TEST_SET[:103]
 score_at_10 = get_accuracy_at_k(test_set, k=10)
 print(score_at_10)
