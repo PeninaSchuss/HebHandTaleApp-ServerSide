@@ -9,11 +9,13 @@ from keras.layers import Dense, Flatten
 from sklearn.model_selection import train_test_split
 import numpy as np
 from tqdm import tqdm
+from config import DATA_DIR_TRAIN
 
 INPUT_IMAGE_SIZE = (32, 32, 3)
-DATA_DIR_TRAIN = r'C:\Users\User\Desktop\כללי\שנה ג\פרויקט גמר\HandwritingProject\data\TRAIN'
-SEED           = 42
-EPOCHS         = 5
+SEED = 42
+EPOCHS = 5
+
+
 # prepare a list of image files to be loaded
 def image_files(input_directory):
     filepaths = []
@@ -43,6 +45,7 @@ def load_images(filepaths):
     images = np.array(images)
     return images
 
+
 def load_vgg_model():
     vgg19 = VGG19(
         weights='imagenet',
@@ -61,14 +64,14 @@ def load_vgg_model():
 
 def train_model(model):
     # load the paths and labels in differnt variables
-    filepaths, labels = image_files(DATA_DIR_TRAIN) # 5,099 files
+    filepaths, labels = image_files(DATA_DIR_TRAIN)  # 5,099 files
     print(f'Using {len(filepaths):,} files for training.')
     # load the 10K images
     images = load_images(filepaths)
     y = to_categorical(labels, num_classes=28)
     X_train, X_test, y_train, y_test = train_test_split(images, y, random_state=SEED, test_size=0.2)
     print('X_train.shape:', X_train.shape)
-    print('X_test.shape:',  X_test.shape)
+    print('X_test.shape:', X_test.shape)
     history = model.fit(
         X_train, y_train,
         epochs=EPOCHS,
@@ -76,12 +79,13 @@ def train_model(model):
         validation_data=(X_test, y_test)
     )
     score = model.evaluate(X_test, y_test)
-    print('score: ',score)
+    print('score: ', score)
     # evaluate the model on your test data
     test_loss, test_accuracy = model.evaluate(X_test, y_test)
     print('Test loss: ', test_loss)
     print('Test accuracy: ', test_accuracy)
     return history
+
 
 def save_model(model, weights_path, architecture_path):
     # Save model weights

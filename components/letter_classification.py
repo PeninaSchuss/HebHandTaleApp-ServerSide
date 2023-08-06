@@ -19,6 +19,7 @@ def load_model():
     print("Model loaded successfully.")
     return model
 
+
 def predict_letters(X):
     model = load_model()
     probabilities = model.predict(X)

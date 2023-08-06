@@ -5,6 +5,8 @@ from evaluation.test_set import TEST_SET
 from config import IMAGES_DIR_TEST
 from runners.run_e2e import run_e2e
 
+AMOUNT_OF_IMAGES_FOR_EVALUATION = 103
+
 
 def get_accuracy_at_k(test_set, k=10):
     total_items = len(test_set)
@@ -18,6 +20,7 @@ def get_accuracy_at_k(test_set, k=10):
     score = correct_items / total_items
     return score
 
-test_set = TEST_SET[:103]
+
+test_set = TEST_SET[:AMOUNT_OF_IMAGES_FOR_EVALUATION]
 score_at_10 = get_accuracy_at_k(test_set, k=10)
 print(score_at_10)
