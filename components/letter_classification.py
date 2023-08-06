@@ -7,13 +7,13 @@ from config import MODEL_PATH_ARCHITECTURE, MODEL_PATH_WEIGHTS
 
 
 def load_model():
-    # Load model architecture from JSON
+    # Load saved_model architecture from JSON
     with open(MODEL_PATH_ARCHITECTURE, 'r') as json_file:
         loaded_model_json = json_file.read()
 
     model = model_from_json(loaded_model_json)
 
-    # Load model weights
+    # Load saved_model weights
     model.load_weights(MODEL_PATH_WEIGHTS)
 
     print("Model loaded successfully.")

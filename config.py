@@ -11,9 +11,9 @@ WORDS_FILENAME = os.path.join(dir_path, "data/vocab/he-vocab.txt")
 DATA_DIR = os.path.join(dir_path, "data")
 IMAGES_DIR_TEST = os.path.join(DATA_DIR, "for_evaluation")
 
-# Update the path to the correct location of the model architecture file
-MODEL_PATH_ARCHITECTURE = os.path.join(DATA_DIR, "model", "model_architecture.json")
-MODEL_PATH_WEIGHTS = os.path.join(DATA_DIR, "model", "model_weights.h5")
+# Update the path to the correct location of the saved_model architecture file
+MODEL_PATH_ARCHITECTURE = os.path.join(DATA_DIR, "saved_model", "model_architecture.json")
+MODEL_PATH_WEIGHTS = os.path.join(DATA_DIR, "saved_model", "model_weights.h5")
 
 # ========= Settings ============
 IMAGE_SIZE = 32

@@ -21,6 +21,6 @@ def get_accuracy_at_k(test_set, k=10):
     return score
 
 
-test_set = TEST_SET[:AMOUNT_OF_IMAGES_FOR_EVALUATION]
+test_set = TEST_SET[:2]
 score_at_10 = get_accuracy_at_k(test_set, k=10)
 print(score_at_10)

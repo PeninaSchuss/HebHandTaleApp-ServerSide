@@ -80,7 +80,7 @@ def train_model(model):
     )
     score = model.evaluate(X_test, y_test)
     print('score: ', score)
-    # evaluate the model on your test data
+    # evaluate the saved_model on your test data
     test_loss, test_accuracy = model.evaluate(X_test, y_test)
     print('Test loss: ', test_loss)
     print('Test accuracy: ', test_accuracy)
@@ -88,10 +88,10 @@ def train_model(model):
 
 
 def save_model(model, weights_path, architecture_path):
-    # Save model weights
+    # Save saved_model weights
     model.save_weights(weights_path)
 
-    # Save model architecture as JSON
+    # Save saved_model architecture as JSON
     model_json = model.to_json()
     with open(architecture_path, 'w') as json_file:
         json_file.write(model_json)
