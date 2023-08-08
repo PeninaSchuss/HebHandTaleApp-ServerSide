@@ -3,8 +3,6 @@ import cv2
 import numpy as np
 from PIL import Image
 from config import IMAGE_SIZE
-from bidi.algorithm import get_display
-
 
 def process_image(image_path):
     assert os.path.exists(image_path)
@@ -94,7 +92,6 @@ def is_contained(coords1, coords2):
         return True
 
     return False
-
 
 
 def resize_as_square(img_np):
