@@ -6,10 +6,9 @@ from components.segmentation import process_image
 from components.letter_classification import predict_letters
 from components.word_correction import get_word_suggestions
 
-
-IMAGE_NAME_WORD_CALL  = 'call.png'
+IMAGE_NAME_WORD_CALL = 'call.png'
 IMAGE_NAME_WORD_HELLO = 'hello.png'
-IMAGE_NAME_WORD       = 'for_evaluation//פנקס.png'
+IMAGE_NAME_WORD = 'פנקס.png'
 
 
 def run_e2e(image_path, top_k=10):
@@ -17,8 +16,7 @@ def run_e2e(image_path, top_k=10):
     predicted_word = predict_letters(np.array(characters))
     print(predicted_word)
     word_suggestions = get_word_suggestions(predicted_word, top_k)
-    print(word_suggestions)
-    return word_suggestions
+    return [predicted_word] + word_suggestions
 
 
 if __name__ == "__main__":
@@ -26,4 +24,3 @@ if __name__ == "__main__":
     input_image_fullpath = os.path.join(DATA_DIR, input_image_name)
     print(f'Predict word... {input_image_fullpath}')
     run_e2e(input_image_fullpath)
-

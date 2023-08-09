@@ -5,7 +5,7 @@ from evaluation.test_set import TEST_SET
 from config import IMAGES_DIR_TEST
 from runners.run_e2e import run_e2e
 
-AMOUNT_OF_IMAGES_FOR_EVALUATION = 103
+AMOUNT_OF_IMAGES_FOR_EVALUATION = 100
 
 
 def get_accuracy_at_k(test_set, k=10):
@@ -15,6 +15,7 @@ def get_accuracy_at_k(test_set, k=10):
         image_path = os.path.join(IMAGES_DIR_TEST, filename)
         print(filename)
         result = run_e2e(image_path, k)
+        print(result)
         if label in result:
             correct_items += 1
 
