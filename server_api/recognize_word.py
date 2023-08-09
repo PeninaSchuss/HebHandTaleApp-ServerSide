@@ -28,6 +28,8 @@ def recognize_word_by_content():
     image_content = request.data
     image_path = save_image_from_base64(image_content)
     result = run_e2e(image_path)
+    if os.path.exists(image_path):
+        os.remove(image_path)
     return {
         "words": result
     }
