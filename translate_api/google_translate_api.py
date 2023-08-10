@@ -17,7 +17,7 @@ def translate_word(word_to_translate, target_language):
         "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
     }
 
-    response = requests.post(url, data=payload, headers=headers)
+    response = requests.post(url, data=payload, headers=headers, verify=False)
 
     # Check if the request was successful
     if response.status_code == 200:
@@ -27,6 +27,7 @@ def translate_word(word_to_translate, target_language):
             translation = data["translations"][0]["translatedText"]
             # print("Source word:", source_word)
             print("Translation:", translation)
+            return data["translations"][0]["translatedText"]
         except KeyError as e:
             print("Error parsing response:", e)
     else:
