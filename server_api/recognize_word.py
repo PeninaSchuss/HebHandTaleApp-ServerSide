@@ -3,6 +3,7 @@ import base64
 import uuid
 from flask import Flask, request
 from runners.run_e2e import run_e2e
+from translate_api.google_translate_api import translate_word
 
 app = Flask(__name__)
 
@@ -33,6 +34,14 @@ def recognize_word_by_content():
     return {
         "words": result
     }
+
+
+@app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>')
+def translate_word_route(word_to_translate, target_language):
+    translation = translate_word(word_to_translate, target_language)
+
+    # Return the translation or an error message
+    return translation
 
 
 def save_image_from_base64(image_content):
