@@ -16,6 +16,7 @@ def run_e2e(image_path, top_k=10):
     predicted_word = predict_letters(np.array(characters))
     print(predicted_word)
     word_suggestions = get_word_suggestions(predicted_word, top_k)
+    print(word_suggestions)
     return [predicted_word] + word_suggestions
 
 
