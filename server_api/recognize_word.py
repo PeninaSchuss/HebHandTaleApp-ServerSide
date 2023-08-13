@@ -5,7 +5,7 @@ import uuid
 from flask import Flask, request, jsonify
 from runners.run_e2e import run_e2e
 from translate_api.google_translate_api import translate_word
-from config import DATABASE_PATH  # Import the DATABASE_PATH from your config
+from config import dir_path  # Import the DATABASE_PATH from your config
 
 app = Flask(__name__)
 
@@ -38,24 +38,67 @@ def recognize_word_by_content():
     }
 
 
-@app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>')
-def translate_word_route(word_to_translate, target_language):
+@app.route('/get_history_by_user/<user_token>')
+def get_history_by_user(user_token):
+    database_filename = "history.db"
+    database_path = os.path.join(dir_path, "dbs", database_filename)
+
+    connection = connect_to_db(database_path)
+    cursor = connection.cursor()
+
+    cursor.execute('''
+        SELECT * FROM translations WHERE user = ?
+    ''', (user_token,))
+
+    rows = cursor.fetchall()
+    connection.close()
+
+    history_list = []
+    for row in rows:
+        history_list.append({
+            "id": row[0],
+            "user": row[1],
+            "language": row[2],
+            "word": row[3],
+            "translation": row[4]
+        })
+
+    return jsonify({"history": history_list})
+
+
+@app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>/<language_name>/<user>')
+def translate_word_route(word_to_translate, target_language, language_name, user):
+    database_filename = "history.db"
+    database_path = os.path.join(dir_path, "dbs", database_filename)
+
     translation = translate_word(word_to_translate, target_language)
 
-    # Return the translation or an error message
+    connection = connect_to_db(database_path)
+    cursor = connection.cursor()
+
+    cursor.execute('''
+        INSERT INTO translations (user, language, word, translation)
+        VALUES (?, ?, ?, ?)
+    ''', (user, language_name, word_to_translate, translation))
+
+    connection.commit()
+    connection.close()
+
     return translation
 
 
 # Connect to the database
-def connect_to_db():
-    connection = sqlite3.connect(DATABASE_PATH)
+def connect_to_db(database_path):
+    connection = sqlite3.connect(database_path)
     return connection
 
 
 @app.route('/add_word_to_popular_words_db/<word_to_add>', methods=['GET'])
 def add_word_to_popular_words_db(word_to_add):
+    database_filename = "popular_words.db"  # Replace with your database file
+    database_path = os.path.join(dir_path, "dbs", database_filename)
     try:
-        connection = connect_to_db()
+        connection = connect_to_db(database_path)
         cursor = connection.cursor()
 
         # Insert the word into the table

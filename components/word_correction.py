@@ -1,15 +1,16 @@
+import os
 from functools import lru_cache
 from tqdm import tqdm
 import sqlite3
 import random
-from config import WORDS_FILENAME, DATABASE_PATH
+from config import WORDS_FILENAME, dir_path
 
 # Replace these with your actual file names and configurations
 MIN_EDIT_DISTANCE_LENGTH = 1
 
 
 def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH):
-    closest_words = []             # to fix!
+    closest_words = []  # to fix!
     words = open(WORDS_FILENAME, encoding='utf-8').read().splitlines()
     for vocab_word in tqdm(words):
         lev_dist_word = lev_dist(word, vocab_word)
@@ -19,7 +20,9 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH)
 
     if len(closest_words) >= top_k:
         # Connect to the database
-        connection = sqlite3.connect(DATABASE_PATH)
+        database_filename = "popular_words.db"  # Replace with your database file
+        database_path = os.path.join(dir_path, "dbs", database_filename)
+        connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
 
         # Fetch popular words from the database
