@@ -14,6 +14,8 @@ IMAGES_DIR_TEST = os.path.join(DATA_DIR, "for_evaluation")
 # Update the path to the correct location of the saved_model architecture file
 MODEL_PATH_ARCHITECTURE = os.path.join(DATA_DIR, "saved_model", "model_architecture.json")
 MODEL_PATH_WEIGHTS = os.path.join(DATA_DIR, "saved_model", "model_weights.h5")
+DATABASE_FILENAME = "popular_words.db"  # Replace with your database file
+DATABASE_PATH = os.path.join(dir_path, "dbs", DATABASE_FILENAME)
 
 # ========= Settings ============
 IMAGE_SIZE = 32

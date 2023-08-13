@@ -1,9 +1,11 @@
 import os
 import base64
+import sqlite3
 import uuid
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from runners.run_e2e import run_e2e
 from translate_api.google_translate_api import translate_word
+from config import DATABASE_PATH  # Import the DATABASE_PATH from your config
 
 app = Flask(__name__)
 
@@ -42,6 +44,35 @@ def translate_word_route(word_to_translate, target_language):
 
     # Return the translation or an error message
     return translation
+
+
+# Connect to the database
+def connect_to_db():
+    connection = sqlite3.connect(DATABASE_PATH)
+    return connection
+
+
+@app.route('/add_word_to_popular_words_db/<word_to_add>', methods=['GET'])
+def add_word_to_popular_words_db(word_to_add):
+    try:
+        connection = connect_to_db()
+        cursor = connection.cursor()
+
+        # Insert the word into the table
+        insert_query = '''
+        INSERT INTO popular_words (data_string)
+        VALUES (?);
+        '''
+        cursor.execute(insert_query, (word_to_add,))
+        connection.commit()
+
+        return jsonify({"message": f"Word '{word_to_add}' added to popular_words.db"}), 201  # Created
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500  # Internal Server Error
+
+    finally:
+        connection.close()
 
 
 def save_image_from_base64(image_content):
