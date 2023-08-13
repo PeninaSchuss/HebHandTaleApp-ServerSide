@@ -97,9 +97,20 @@ def connect_to_db(database_path):
 def add_word_to_popular_words_db(word_to_add):
     database_filename = "popular_words.db"  # Replace with your database file
     database_path = os.path.join(dir_path, "dbs", database_filename)
+
     try:
         connection = connect_to_db(database_path)
         cursor = connection.cursor()
+
+        # Check if the word already exists in the table
+        select_query = '''
+        SELECT data_string FROM popular_words WHERE data_string = ?;
+        '''
+        cursor.execute(select_query, (word_to_add,))
+        existing_word = cursor.fetchone()
+
+        if existing_word:
+            return jsonify({"message": f"Word '{word_to_add}' already exists in popular_words.db"}), 200  # OK
 
         # Insert the word into the table
         insert_query = '''
