@@ -3,14 +3,15 @@ from functools import lru_cache
 from tqdm import tqdm
 import sqlite3
 import random
-from config import WORDS_FILENAME, dir_path
+from config import WORDS_FILENAME, DIR_PATH
 
 # Replace these with your actual file names and configurations
 MIN_EDIT_DISTANCE_LENGTH = 1
 
 
-def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH):
-    closest_words = []  # to fix!
+def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH, closest_words=None):
+    if closest_words is None:
+        closest_words = []
     words = open(WORDS_FILENAME, encoding='utf-8').read().splitlines()
     for vocab_word in tqdm(words):
         lev_dist_word = lev_dist(word, vocab_word)
@@ -21,7 +22,7 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH)
     if len(closest_words) >= top_k:
         # Connect to the database
         database_filename = "popular_words.db"  # Replace with your database file
-        database_path = os.path.join(dir_path, "dbs", database_filename)
+        database_path = os.path.join(DIR_PATH, "dbs", database_filename)
         connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
 
@@ -55,7 +56,7 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH)
 
         return selected_popular_suggestions
 
-    return get_word_suggestions(word, top_k=10, min_edit_dist=min_edit_dist + 1)
+    return get_word_suggestions(word, top_k=10, min_edit_dist=min_edit_dist + 1, closest_words=closest_words)
 
 
 def lev_dist(a, b):

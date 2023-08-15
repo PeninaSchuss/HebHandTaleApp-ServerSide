@@ -1,14 +1,14 @@
 import os
 
-dir_path = os.path.dirname(os.path.realpath(__file__))  # Current file's directory
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))  # Current file's directory
 
 # ========= Paths ============
 # Data for training VGG
-DATA_DIR_TRAIN = os.path.join(dir_path, "data", "letters")
+DATA_DIR_TRAIN = os.path.join(DIR_PATH, "data", "letters")
 # Vocabulary
-WORDS_FILENAME = os.path.join(dir_path, "data/vocab/he-vocab.txt")
+WORDS_FILENAME = os.path.join(DIR_PATH, "data/vocab/he-vocab.txt")
 # Examples directory
-DATA_DIR = os.path.join(dir_path, "data")
+DATA_DIR = os.path.join(DIR_PATH, "data")
 IMAGES_DIR_TEST = os.path.join(DATA_DIR, "for_evaluation")
 
 # Update the path to the correct location of the saved_model architecture file
