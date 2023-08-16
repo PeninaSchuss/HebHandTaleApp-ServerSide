@@ -57,7 +57,7 @@ def _process_characters(connected_components_output, original_img):
 
     chars_to_delete = []
     for i in range(num_chars):
-        for j in range(i - 1, i + 2):
+        for j in range(num_chars):
             if i != j and num_chars > j > -1 and is_contained(coords[i], coords[j]):
                 # If ק is found, find the bounding box that contains both parts of ק
                 min_x = min(coords[i][0], coords[j][0])
