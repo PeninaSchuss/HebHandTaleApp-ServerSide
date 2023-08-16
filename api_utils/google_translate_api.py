@@ -13,7 +13,7 @@ def translate_word(word_to_translate, target_language):
     headers = {
         "content-type": "application/x-www-form-urlencoded",
         "Accept-Encoding": "application/gzip",
-        "X-RapidAPI-Key": "2e310832a1mshc3c3095fad92cf2p13d8e8jsn272f97d004bf",  # Replace this with your actual API key
+        "X-RapidAPI-Key": "cb66237962msh072cf932d6327eep1b0f92jsnc07647de39d9",  # Replace this with your actual API key
         "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
     }
 
