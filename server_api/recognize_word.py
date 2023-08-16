@@ -43,6 +43,8 @@ def get_history_by_user(user_token):
     return jsonify({"history": history_list})
 
 
+@app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>/<language_name>',
+           defaults={'user': None})
 @app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>/<language_name>/<user>')
 def translate_word_route(word_to_translate, target_language, language_name, user=None):
     translation = translate_word(word_to_translate, target_language)
@@ -51,6 +53,7 @@ def translate_word_route(word_to_translate, target_language, language_name, user
         add_history_to_db(user, language_name, word_to_translate, translation)
 
     return translation
+
 
 
 @app.route('/add_word_to_popular_words_db/<word_to_add>', methods=['GET'])
