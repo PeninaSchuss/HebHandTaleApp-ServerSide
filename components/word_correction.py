@@ -9,9 +9,8 @@ from config import WORDS_FILENAME, DIR_PATH
 MIN_EDIT_DISTANCE_LENGTH = 1
 
 
-def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH, closest_words=None):
-    if closest_words is None:
-        closest_words = []
+def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH):
+    closest_words = []
     words = open(WORDS_FILENAME, encoding='utf-8').read().splitlines()
     for vocab_word in tqdm(words):
         lev_dist_word = lev_dist(word, vocab_word)
@@ -56,7 +55,7 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH,
 
         return selected_popular_suggestions
 
-    return get_word_suggestions(word, top_k=10, min_edit_dist=min_edit_dist + 1, closest_words=closest_words)
+    return get_word_suggestions(word, top_k=10, min_edit_dist=min_edit_dist + 1)
 
 
 def lev_dist(a, b):
