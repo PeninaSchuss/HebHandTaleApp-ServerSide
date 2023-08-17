@@ -35,10 +35,3 @@ def translate_word(word_to_translate, target_language):
 
     return response
 
-
-def translate_word_from_google(word_to_translate, target_language):
-    # Implement the translation logic here
-    # Return the translated word and the audio URL as a tuple
-    translated_word = "Translated_Word"  # Replace with the actual translation
-    audio_url = "https://example.com/audio_url.mp3"  # Replace with the actual audio URL
-    return translated_word, audio_url
