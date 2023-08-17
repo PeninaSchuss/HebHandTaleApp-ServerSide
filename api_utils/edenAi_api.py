@@ -1,5 +1,6 @@
 import requests
-import pygame
+import subprocess
+from playsound import playsound
 
 # Define the API URL
 url = "https://api.edenai.run/v2/audio/text_to_speech"
@@ -27,17 +28,15 @@ payload = {
 }
 
 # Send the POST request
-response = requests.post(url, headers=headers, json=payload)
+response = requests.post(url, headers=headers, json=payload, verify= False)
 
 # Extract and use the audio URL for playback, assuming it's present in the response
 if response.status_code == 200:
-    audio_data = response.json()  # Assuming the response is in JSON format
-    audio_url = audio_data.get("url")
+    audio_data = response.json()
+    print(audio_data)  # Print the entire JSON response for debugging
+    audio_url = audio_data.get("audio_resource_url")
+    print(audio_url)
     if audio_url:
-        pygame.mixer.init()
-        pygame.mixer.music.load(audio_url)
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy():
-            pygame.time.Clock().tick(10)
+        playsound(audio_url)
 else:
     print("API request failed:", response.status_code, response.text)

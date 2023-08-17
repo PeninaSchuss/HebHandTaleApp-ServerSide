@@ -5,7 +5,7 @@ from api_utils.word_img_decode import save_image_from_base64
 from dbs.db_history import add_history_to_db, get_history
 from dbs.db_popular_word import add_word_to_db
 from runners.run_e2e import run_e2e
-from api_utils.google_translate_api import translate_word
+from api_utils.google_translate_api import translate_word, translate_word_from_google
 from config import DIR_PATH  # Import the DATABASE_PATH from your config
 
 app = Flask(__name__)
@@ -47,13 +47,17 @@ def get_history_by_user(user_token):
            defaults={'user': None})
 @app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>/<language_name>/<user>')
 def translate_word_route(word_to_translate, target_language, language_name, user=None):
-    translation = translate_word(word_to_translate, target_language)
+    translation, audio_url = translate_word_from_google(word_to_translate, target_language)
 
     if user is not None:
         add_history_to_db(user, language_name, word_to_translate, translation)
 
-    return translation
+    response_data = {
+        "translation": translation,
+        "audio_url": audio_url
+    }
 
+    return response_data
 
 
 @app.route('/add_word_to_popular_words_db/<word_to_add>', methods=['GET'])
