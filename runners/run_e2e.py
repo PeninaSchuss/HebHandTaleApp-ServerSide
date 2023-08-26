@@ -8,7 +8,7 @@ from components.word_correction import get_word_suggestions
 
 IMAGE_NAME_WORD_CALL = 'call.png'
 IMAGE_NAME_WORD_HELLO = 'hello.png'
-IMAGE_NAME_WORD = 'פנקס.png'
+IMAGE_NAME_WORD = 'חמאה.png'
 
 
 def run_e2e(image_path, top_k=10):

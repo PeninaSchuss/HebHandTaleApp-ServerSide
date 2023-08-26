@@ -23,7 +23,7 @@ def generate_and_play_audio(text, target_language):
         "providers": "microsoft,lovoai,google,ibm,amazon",
         "language": target_language,
         "text": text,
-        "option": "FEMALE"
+        "option": "MALE"
     }
 
     edenai_response = requests.post(edenai_url, headers=edenai_headers, json=edenai_payload, verify=False)

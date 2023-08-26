@@ -5,7 +5,7 @@ from evaluation.test_set import TEST_SET
 from config import IMAGES_DIR_TEST
 from runners.run_e2e import run_e2e
 
-AMOUNT_OF_IMAGES_FOR_EVALUATION = 100
+AMOUNT_OF_IMAGES_FOR_EVALUATION = 101
 
 
 def get_accuracy_at_k(test_set, k=10):
