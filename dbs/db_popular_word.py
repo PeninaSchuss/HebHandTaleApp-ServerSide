@@ -55,6 +55,8 @@ def print_popular_word_table():
 
 
 def add_word_to_db(word_to_add):
+    if not os.path.exists('popular_words.db'):
+        create_popular_word_table()
     try:
         db_path = os.path.join(os.path.dirname(__file__), 'popular_words.db')
         connection = sqlite3.connect(db_path)

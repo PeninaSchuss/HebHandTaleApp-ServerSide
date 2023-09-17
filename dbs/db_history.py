@@ -35,6 +35,8 @@ def print_history_table():
     connection.close()
 
 def add_history_to_db(user, language_name, word_to_translate, translation):
+    if not os.path.exists('history.db'):
+        create_history_table()
     db_path = os.path.join(os.path.dirname(__file__), 'history.db')
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
@@ -48,6 +50,8 @@ def add_history_to_db(user, language_name, word_to_translate, translation):
     connection.close()
 
 def get_history(user_token):
+    if not os.path.exists('history.db'):
+        create_history_table()
     db_path = os.path.join(os.path.dirname(__file__), 'history.db')
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
