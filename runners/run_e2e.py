@@ -6,8 +6,6 @@ from components.segmentation import process_image
 from components.letter_classification import predict_letters
 from components.word_correction import get_word_suggestions
 
-IMAGE_NAME_WORD_CALL = 'call.png'
-IMAGE_NAME_WORD_HELLO = 'hello.png'
 IMAGE_NAME_WORD = 'חמאה.png'
 
 
