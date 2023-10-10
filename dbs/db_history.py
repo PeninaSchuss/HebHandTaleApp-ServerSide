@@ -2,8 +2,15 @@ import os
 import sqlite3
 from datetime import datetime
 
+from config import DIR_PATH
+
+
 def create_history_table():
-    connection = sqlite3.connect('history.db')
+    database_filename = "history.db"
+    database_path = os.path.join(DIR_PATH, "dbs", database_filename)
+    # Connect to the database
+    connection = sqlite3.connect(database_path)
+
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -20,6 +27,7 @@ def create_history_table():
     connection.commit()
     connection.close()
 
+
 def print_history_table():
     connection = sqlite3.connect('history.db')
     cursor = connection.cursor()
@@ -34,11 +42,13 @@ def print_history_table():
 
     connection.close()
 
+
 def add_history_to_db(user, language_name, word_to_translate, translation):
-    if not os.path.exists('history.db'):
+    database_filename = "history.db"
+    database_path = os.path.join(DIR_PATH, "dbs", database_filename)
+    if not os.path.exists(database_path):
         create_history_table()
-    db_path = os.path.join(os.path.dirname(__file__), 'history.db')
-    connection = sqlite3.connect(db_path)
+    connection = sqlite3.connect(database_path)
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -49,11 +59,13 @@ def add_history_to_db(user, language_name, word_to_translate, translation):
     connection.commit()
     connection.close()
 
+
 def get_history(user_token):
-    if not os.path.exists('history.db'):
+    database_filename = "history.db"
+    database_path = os.path.join(DIR_PATH, "dbs", database_filename)
+    if not os.path.exists(database_path):
         create_history_table()
-    db_path = os.path.join(os.path.dirname(__file__), 'history.db')
-    connection = sqlite3.connect(db_path)
+    connection = sqlite3.connect(database_path)
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -75,6 +87,7 @@ def get_history(user_token):
         })
 
     return history_list
+
 
 if __name__ == '__main__':
     create_history_table()

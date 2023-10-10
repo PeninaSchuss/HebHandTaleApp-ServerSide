@@ -4,6 +4,7 @@ from tqdm import tqdm
 import sqlite3
 import random
 from config import WORDS_FILENAME, DIR_PATH
+from dbs.db_popular_word import get_all_popular_words
 
 # Replace these with your actual file names and configurations
 MIN_EDIT_DISTANCE_LENGTH = 1
@@ -19,15 +20,7 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH)
     closest_words = sorted(closest_words, key=lambda x: (x[0], x[1]))
 
     if len(closest_words) >= top_k:
-        # Connect to the database
-        database_filename = "popular_words.db"  # Replace with your database file
-        database_path = os.path.join(DIR_PATH, "dbs", database_filename)
-        connection = sqlite3.connect(database_path)
-        cursor = connection.cursor()
-
-        # Fetch popular words from the database
-        cursor.execute("SELECT data_string FROM popular_words;")
-        popular_words = set(row[0] for row in cursor.fetchall())
+        popular_words = get_all_popular_words()
 
         # Get popular suggestions that exist in both closest_words and popular_words.db
         popular_suggestions = [word for _, word in closest_words if word in popular_words]
@@ -49,9 +42,6 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH)
 
             # Combine popular and random suggestions
             selected_popular_suggestions = popular_suggestions + random_suggestions
-
-        # Close the database connection
-        connection.close()
 
         return selected_popular_suggestions
 

@@ -3,10 +3,14 @@ import sqlite3
 
 from flask import jsonify
 
+from config import DIR_PATH
+
 
 def create_popular_word_table():
+    database_filename = "popular_words.db"
+    database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     # Connect to the database
-    connection = sqlite3.connect("popular_words.db")
+    connection = sqlite3.connect(database_path)
 
     # Create a cursor
     cursor = connection.cursor()
@@ -55,12 +59,12 @@ def print_popular_word_table():
 
 
 def add_word_to_db(word_to_add):
-    if not os.path.exists('popular_words.db'):
+    database_filename = "popular_words.db"
+    database_path = os.path.join(DIR_PATH, "dbs", database_filename)
+    if not os.path.exists(database_path):
         create_popular_word_table()
     try:
-        db_path = os.path.join(os.path.dirname(__file__), 'popular_words.db')
-        connection = sqlite3.connect(db_path)
-
+        connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
 
         # Check if the word already exists in the table
@@ -86,6 +90,21 @@ def add_word_to_db(word_to_add):
     except Exception as e:
         connection.close()
         return jsonify({"error": str(e)}), 500  # Internal Server Error
+
+
+def get_all_popular_words():
+    database_filename = "popular_words.db"
+    database_path = os.path.join(DIR_PATH, "dbs", database_filename)
+    if not os.path.exists(database_path):
+        create_popular_word_table()
+    connection = sqlite3.connect(database_path)
+    cursor = connection.cursor()
+
+    # Fetch popular words from the database
+    cursor.execute("SELECT data_string FROM popular_words;")
+    popular_words = set(row[0] for row in cursor.fetchall())
+    connection.close()
+    return popular_words
 
 
 if __name__ == '__main__':
