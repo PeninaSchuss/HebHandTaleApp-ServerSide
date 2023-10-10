@@ -1,8 +1,6 @@
 import os
 import sqlite3
-
 from flask import jsonify
-
 from config import DIR_PATH
 
 

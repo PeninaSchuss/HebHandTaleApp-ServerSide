@@ -1,6 +1,5 @@
 import os
 from tqdm import tqdm
-
 from evaluation.test_set import TEST_SET
 from config import IMAGES_DIR_TEST
 from runners.run_e2e import run_e2e

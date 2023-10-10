@@ -1,6 +1,5 @@
 import os
 import numpy as np
-
 from config import DATA_DIR
 from components.segmentation import process_image
 from components.letter_classification import predict_letters

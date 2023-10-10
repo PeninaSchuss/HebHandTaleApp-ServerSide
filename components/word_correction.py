@@ -1,9 +1,6 @@
-import os
 from functools import lru_cache
 from tqdm import tqdm
-import sqlite3
-import random
-from config import WORDS_FILENAME, DIR_PATH
+from config import WORDS_FILENAME
 from dbs.db_popular_word import get_all_popular_words
 
 # Replace these with your actual file names and configurations
