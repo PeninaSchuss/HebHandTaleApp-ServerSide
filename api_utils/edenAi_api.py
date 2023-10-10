@@ -3,7 +3,7 @@ edenai_url = "https://api.edenai.run/v2/audio/text_to_speech"
 
 # Define the request headers including the authorization token
 edenai_headers = {
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTM0ZGNhZDQtYmU4NS00YWQ4LTkzY2ItZmUyYTgwYzY2ZDY2IiwidHlwZSI6ImFwaV90b2tlbiJ9.QdMoXDg6S_a7YqwrrL21R7QqyrpVAZEt2iNxO1m7rbU",
+    "Authorization": "Bearer API_KEY",  # Replace this with your actual API key
     "Content-Type": "application/json",
     "Accept": "application/json"
 }
