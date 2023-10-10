@@ -1,6 +1,4 @@
 import requests
-from playsound import playsound
-import urllib.parse
 edenai_url = "https://api.edenai.run/v2/audio/text_to_speech"
 
 # Define the request headers including the authorization token
