@@ -3,11 +3,17 @@ from tqdm import tqdm
 from config import WORDS_FILENAME
 from dbs.db_popular_word import get_all_popular_words
 
-# Replace these with your actual file names and configurations
 MIN_EDIT_DISTANCE_LENGTH = 1
 
 
 def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH):
+    """
+    This function returns the closest words to the input word
+    :param word: the word to get suggestions for
+    :param top_k: the number of suggestions to return
+    :param min_edit_dist: the minimum edit distance between the input word and the suggestions
+    :return: selected_popular_suggestions - the closest words to the input word
+    """
     closest_words = []
     words = open(WORDS_FILENAME, encoding='utf-8').read().splitlines()
     for vocab_word in tqdm(words):
@@ -46,11 +52,12 @@ def get_word_suggestions(word, top_k=10, min_edit_dist=MIN_EDIT_DISTANCE_LENGTH)
 
 
 def lev_dist(a, b):
-    '''
+    """
     This function will calculate the levenshtein distance between two input
-    strings a and b
-    example: a = 'stamp', b = 'stomp', lev_dist(a,b) >> 1.0
-    '''
+    :param a: the first word
+    :param b: the second word
+    :return: min_dist - the levenshtein distance between the two words
+    """
 
     @lru_cache(None)  # for memorization
     def min_dist(s1, s2):

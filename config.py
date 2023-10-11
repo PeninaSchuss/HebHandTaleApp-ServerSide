@@ -1,13 +1,16 @@
 import os
 
-DIR_PATH = os.path.dirname(os.path.realpath(__file__))  # Current file's directory
 
 # ========= Paths ============
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))  # Current file's directory
+
 # Data for training VGG
 DATA_DIR_TRAIN = os.path.join(DIR_PATH, "data", "letters")
+
 # Vocabulary
 WORDS_FILENAME = os.path.join(DIR_PATH, "data/vocab/he-vocab.txt")
-# Examples directory
+
+
 DATA_DIR = os.path.join(DIR_PATH, "data")
 IMAGES_DIR_TEST = os.path.join(DATA_DIR, "for_evaluation")
 

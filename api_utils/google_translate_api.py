@@ -1,9 +1,17 @@
 import requests
 
+# Define the url to send the request to
 url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
 
 
+
 def translate_word(word_to_translate, target_language):
+    """
+    This function translates a word with google api (rapidapi)
+    :param word_to_translate: word to translate
+    :param target_language: target language
+    :return: translation - translation
+    """
     payload = {
         "q": word_to_translate,
         "target": target_language,
@@ -31,4 +39,3 @@ def translate_word(word_to_translate, target_language):
         print("Translation failed. Status code:", response.status_code)
 
     return response
-

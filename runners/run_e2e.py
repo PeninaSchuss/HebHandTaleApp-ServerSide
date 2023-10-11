@@ -9,6 +9,11 @@ IMAGE_NAME_WORD = 'חמאה.png'
 
 
 def run_e2e(image_path, top_k=10):
+    """
+    This function runs the end to end pipeline on an image and returns the predicted word and the word suggestions for it
+    :param image_path: the path of the image to process
+    :param top_k: the number of word suggestions to return
+    """
     characters = process_image(image_path)
     predicted_word = predict_letters(np.array(characters))
     print(predicted_word)

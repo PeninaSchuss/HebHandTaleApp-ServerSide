@@ -4,6 +4,10 @@ from config import DIR_PATH
 
 
 def create_history_table():
+    """
+    This function creates the history table in the database
+    :return: None
+    """
     database_filename = "history.db"
     database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     # Connect to the database
@@ -27,6 +31,10 @@ def create_history_table():
 
 
 def print_history_table():
+    """
+    This function prints the history table
+    :return: None
+    """
     connection = sqlite3.connect('history.db')
     cursor = connection.cursor()
 
@@ -42,6 +50,14 @@ def print_history_table():
 
 
 def add_history_to_db(user, language_name, word_to_translate, translation):
+    """
+    This function adds a translation to the history table
+    :param user: the user that requested the translation
+    :param language_name: the language name
+    :param word_to_translate: the word to translate
+    :param translation: the translation
+    :return: None
+    """
     database_filename = "history.db"
     database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     if not os.path.exists(database_path):
@@ -59,6 +75,11 @@ def add_history_to_db(user, language_name, word_to_translate, translation):
 
 
 def get_history(user_token):
+    """
+    This function returns the history of a user
+    :param user_token: the user token to retrieve the history for
+    :return: history_list - the history of the user
+    """
     database_filename = "history.db"
     database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     if not os.path.exists(database_path):

@@ -1,3 +1,7 @@
+"""
+This file contains the test set for the evaluation.
+The test set is a list of tuples of the form (filename, label of the handwritten word in the image).
+"""
 TEST_SET = [("אבא.png", "אבא"),
             ("אגף.png", "אגף"),
             ("אלף.png", "אלף"),

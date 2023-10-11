@@ -5,7 +5,13 @@ import uuid
 from config import DIR_PATH
 
 
+
 def save_image_from_base64(image_content):
+    """
+    This function saves an image from base64 to a file
+    :param image_content: image content in base64
+    :return: image_path - image path in the server
+    """
     image_data = base64.b64decode(image_content)
     filename = str(uuid.uuid4()) + '.png'
 

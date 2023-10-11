@@ -5,6 +5,10 @@ from config import DIR_PATH
 
 
 def create_popular_word_table():
+    """
+    This function creates the popular_words table
+    :return: None
+    """
     database_filename = "popular_words.db"
     database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     # Connect to the database
@@ -37,6 +41,10 @@ def create_popular_word_table():
 
 
 def print_popular_word_table():
+    """
+    This function prints the popular_words table content
+    :return: None
+    """
     # Connect to the database
     connection = sqlite3.connect("popular_words.db")
 
@@ -57,6 +65,11 @@ def print_popular_word_table():
 
 
 def add_word_to_db(word_to_add):
+    """
+    This function adds a word to the popular_words table
+    :param word_to_add: the word to add
+    :return: None
+    """
     database_filename = "popular_words.db"
     database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     if not os.path.exists(database_path):
@@ -91,6 +104,10 @@ def add_word_to_db(word_to_add):
 
 
 def get_all_popular_words():
+    """
+    This function returns all the popular words from the database
+    :return: popular_words - a set of all the popular words in the database
+    """
     database_filename = "popular_words.db"
     database_path = os.path.join(DIR_PATH, "dbs", database_filename)
     if not os.path.exists(database_path):

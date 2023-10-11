@@ -16,8 +16,12 @@ SEED = 42
 EPOCHS = 5
 
 
-# prepare a list of image files to be loaded
 def image_files(input_directory):
+    """
+    This function returns the filepaths and labels of the images in the input directory
+    :param input_directory: the directory to search for images
+    :return: filepaths, labels - lists of the filepaths and labels of the images
+    """
     filepaths = []
     labels = []
 
@@ -34,6 +38,11 @@ def image_files(input_directory):
 
 
 def load_images(filepaths):
+    """
+    This function loads the images from the filepaths and returns them as a numpy array
+    :param filepaths: the filepaths of the images
+    :return: images - a numpy array of the images
+    """
     images = []
     for i in tqdm(range(len(filepaths))):
         img = load_img(filepaths[i], target_size=INPUT_IMAGE_SIZE, grayscale=False)
@@ -47,6 +56,10 @@ def load_images(filepaths):
 
 
 def load_vgg_model():
+    """
+    This function loads the VGG19 model and adds a dense layer on top of it
+    :return: model - the model with the dense layer on top of it
+    """
     vgg19 = VGG19(
         weights='imagenet',
         include_top=False,
@@ -63,10 +76,14 @@ def load_vgg_model():
 
 
 def train_model(model):
-    # load the paths and labels in differnt variables
+    """
+    This function trains the model and returns the history of the training
+    :param model: the model to train
+    :return: history - the history of the training
+    """
+    # load the paths and labels in different variables
     filepaths, labels = image_files(DATA_DIR_TRAIN)  # 5,099 files
     print(f'Using {len(filepaths):,} files for training.')
-    # load the 10K images
     images = load_images(filepaths)
     y = to_categorical(labels, num_classes=28)
     X_train, X_test, y_train, y_test = train_test_split(images, y, random_state=SEED, test_size=0.2)
@@ -88,6 +105,13 @@ def train_model(model):
 
 
 def save_model(model, weights_path, architecture_path):
+    """
+    This function saves the model weights and architecture
+    :param model: the model to save
+    :param weights_path: the path to save the weights to
+    :param architecture_path: the path to save the architecture to
+    :return: None
+    """
     # Save saved_model weights
     model.save_weights(weights_path)
 

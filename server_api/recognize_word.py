@@ -12,6 +12,10 @@ app = Flask(__name__)
 
 @app.route('/recognize_word_by_content', methods=['POST'])
 def recognize_word_by_content():
+    """
+    This function receives an image in base64 format and returns the predicted word and the word suggestions for it
+    :return: a json with the predicted word and the word suggestions for it
+    """
     image_content = request.data
     image_path = save_image_from_base64(image_content)
     result = run_e2e(image_path)
@@ -24,6 +28,11 @@ def recognize_word_by_content():
 
 @app.route('/get_history_by_user/<user_token>')
 def get_history_by_user(user_token):
+    """
+    This function receives a user token and returns the history of the user
+    :param user_token: the user token
+    :return: a json with the history of the user
+    """
     history_list = get_history(user_token)
     return jsonify({"history": history_list})
 
@@ -32,6 +41,14 @@ def get_history_by_user(user_token):
            defaults={'user': None})
 @app.route('/translate_word_with_google_api/<word_to_translate>/<target_language>/<language_name>/<user>')
 def translate_word_route(word_to_translate, target_language, language_name, user=None):
+    """
+    This function receives a word to translate, a target language and a language name and returns the translation
+    :param word_to_translate: the word to translate
+    :param target_language: the target language code for google api
+    :param language_name: the language name
+    :param user: the user token (optional)
+    :return: a json with the translation
+    """
     translation = translate_word(word_to_translate, target_language)
     audio_url = ""
 
@@ -51,4 +68,9 @@ def translate_word_route(word_to_translate, target_language, language_name, user
 
 @app.route('/add_word_to_popular_words_db/<word_to_add>', methods=['GET'])
 def add_word_to_popular_words_db(word_to_add):
+    """
+    This function receives a word to add to the popular words db
+    :param word_to_add: the word to add
+    :return: a json with the result of the addition to the db (True/False)
+    """
     return add_word_to_db(word_to_add)

@@ -1,4 +1,5 @@
 import requests
+
 edenai_url = "https://api.edenai.run/v2/audio/text_to_speech"
 
 # Define the request headers including the authorization token
@@ -10,6 +11,12 @@ edenai_headers = {
 
 
 def generate_and_play_audio(text, target_language):
+    """
+    This function generates and creates audio
+    :param text: text to turn to audio
+    :param target_language: target language for the audio
+    :return: audio_url - audio url
+    """
     edenai_payload = {
         "response_as_dict": True,
         "attributes_as_list": False,
@@ -36,6 +43,3 @@ def generate_and_play_audio(text, target_language):
         audio_url = None
 
     return audio_url if audio_url else ""
-
-
-
