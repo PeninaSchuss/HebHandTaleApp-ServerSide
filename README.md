@@ -23,7 +23,7 @@ The server side is written in Python and uses Flask framework.
 5) evaluation - contains the files for the evaluation of the three steps of the image recognition process.
 6) notebooks - contains the notebooks files, that were used to test the model and the other parts of the recognition process.
 7) runners - contains the files that run each of the three steps of the image recognition process.
-8) server_api - contains the file that run the server. this file constitutes the api of this project.
+8) server_api - contains the file that run the server. this file constitutes the api of this project. and contains a file with examples of using the api.
 9) training - contains the files that were used to train the model.
 
 ## How to install the required libraries in the project
