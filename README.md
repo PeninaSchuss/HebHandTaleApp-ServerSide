@@ -37,18 +37,18 @@ https://www.jetbrains.com/help/pycharm/using-pipfile.html
 2) Paste the key in the appropriate place, in the file: google_translate_api.py under the folder: api_utils.
 3) Create an account in EdenAi and get a key for the text to speech api. https://docs.edenai.co/reference/start-your-ai-journey-with-edenai
 4) Paste the key in the appropriate place, in the file: edenAi_api.py under the folder: api_utils.
-So far the instructions for using the translation.
+#### So far the instructions for using the translation.
 
 ### Instructions for running the project:
-#### In order to use the functions found in the server_api.py file, you must run this file using Flask framework:
-On a Windows computer this can be done using the Windows PowerShell:
+#### In order to use the functions found in the server_api.py file, you must run the Flask framework. This can be done in the following way:
+##### On a Windows computer this can be done using the Windows PowerShell:
 1) Open the Windows PowerShell.
 2) Go to the folder where the project is located.
 3) Run the following command: ```$env:FLASK_APP = "server_api.recognize_word"```
 4) Run the following command: ```flask run```
 5) Now the ip and port that flask is listening to, will be printed. (localhost). Usually the default printing is:
 ```* Running on http://127.0.0.1:5000```
-For an operating system other than Windows, follow the instructions in the following link:
+##### For an operating system other than Windows, follow the instructions in the following link:
 https://flask.palletsprojects.com/en/1.1.x/cli/
 
 #### For Examples of using the functions found in the server_api.py file, see the file: server_api_examples.md under the folder: server_api.
