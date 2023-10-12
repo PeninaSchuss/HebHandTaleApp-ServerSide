@@ -10,7 +10,7 @@ The server side is written in Python and uses Flask framework.
 1) Image recognition process, Which is done in 3 steps:
     1) Cutting the word in the picture into letters.
     2) Identifying the letters by the VGG19 model.
-    3) Finding similar words that have been identified. 
+    3) Finding similar words to the word that identified in the previous step.
 2) Bringing a translation and audio of the translation. It is done by using 2 external apis:
     1) Rapid api - google translate: to receive a translation.
     2) EdenAi api - text to speech: to receive audio of the translation text.
@@ -33,14 +33,15 @@ https://www.jetbrains.com/help/pycharm/using-pipfile.html
 
 ## How to run the project
 ### If the second part of the project - translation and audio of a word - is used, the following steps must be taken:
-1) Create an account in Rapid api and get a key for the google translate api. https://rapidapi.com/googlecloud/api/google-translate1/tutorials/how-to-use-the-google-translate-api-with-javascript
+1) Create an account in Rapid api and get a key for the Google Translate api. https://rapidapi.com/googlecloud/api/google-translate1/tutorials/how-to-use-the-google-translate-api-with-javascript
 2) Paste the key in the appropriate place, in the file: google_translate_api.py under the folder: api_utils.
 3) Create an account in EdenAi and get a key for the text to speech api. https://docs.edenai.co/reference/start-your-ai-journey-with-edenai
 4) Paste the key in the appropriate place, in the file: edenAi_api.py under the folder: api_utils.
 So far the instructions for using the translation.
+
 ### Instructions for running the project:
 #### In order to use the functions found in the server_api.py file, you must run this file using Flask framework:
-On a Windows computer this can be done using the Windows Power Shell:
+On a Windows computer this can be done using the Windows PowerShell:
 1) Open the Windows PowerShell.
 2) Go to the folder where the project is located.
 3) Run the following command: ```$env:FLASK_APP = "server_api.recognize_word"```
@@ -49,7 +50,9 @@ On a Windows computer this can be done using the Windows Power Shell:
 ```* Running on http://127.0.0.1:5000```
 For an operating system other than Windows, follow the instructions in the following link:
 https://flask.palletsprojects.com/en/1.1.x/cli/
+
 #### For Examples of using the functions found in the server_api.py file, see the file: server_api_examples.md under the folder: server_api.
+
 #### In order to use this project with the interface - the web application itself, you must access the client-side project and apply the instructions found there in the README.
 For the client-side project, see the following link:
 https://github.com/MichalMeshi/HebHandTaleApp-ClientSide
